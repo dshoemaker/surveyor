@@ -1,0 +1,21 @@
+<%= form_with model: survey_response, local: true do |form| %>
+  <% if survey_response.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(survey_response.errors.count, "error") %> prohibited this response from being saved:</h2>
+
+      <ul>
+        <% survey_response.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :survey_question_response do |question_response_form| %>
+    <%= response_input_for(question_response_form, survey_question) %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

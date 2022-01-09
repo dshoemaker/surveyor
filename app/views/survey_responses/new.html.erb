@@ -1,0 +1,5 @@
+<h1>New Survey Response</h1>
+
+<%= render 'form', survey_response: @survey_response, survey: @survey, survey_question: @survey.survey_question %>
+
+<%= link_to 'Back', survey_responses_path(@survey) %>

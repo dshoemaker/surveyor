@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Surveys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Question</th>
+      <th></th>
+      <th>Yes Response %</th>
+      <th>No Response %</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <td><%= link_to survey.title, new_survey_response_path(survey) %></td>
+        <td><%= survey.survey_question.content %></td>
+        <td><%= link_to 'List Responses', survey_responses_path(survey) %></td>
+        <td><%= number_to_percentage(survey.yes_percentage, strip_insignificant_zeros: true) %></td>
+        <td><%= number_to_percentage(survey.no_percentage, strip_insignificant_zeros: true) %></td>
+        <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Survey', new_survey_path %>

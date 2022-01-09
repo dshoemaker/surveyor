@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Survey Responses</h1>
+<h2><%= @survey.title %></h2>
+<h3><%= @survey.survey_question.content %></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Responder Email</th>
+      <th colspan="3">Response</th>
+      <th>Responded At</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @survey_responses.each do |response| %>
+      <tr>
+        <td><%= response.user.email %></td>
+        <td colspan='3'><%= response.survey_question_response.binary_response ? 'Y' : 'N' %></td>
+        <td><%= response.created_at.to_date %>
+        <td><%= link_to 'Destroy', survey_response_url(id: response.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Respond to this survey', new_survey_response_path %>
+<br>
+<%= link_to 'Back to all surveys', surveys_path %>
